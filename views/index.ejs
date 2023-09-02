@@ -1,0 +1,52 @@
+<%- include("partials/header.ejs") %>
+
+
+
+<h1>To Do List</h1>
+
+<nav>
+  <button id="all">All</button>
+  <button id="work">Work</button>
+  <button id="study">Study</button>
+  <button id="fun">Fun</button>
+  <button id="other">Other</button>
+</nav>
+
+<form action="/submit" method="POST">
+  <input type="text" name="task" id="task" placeholder="Add Task" required><br>
+  <label>Start Date</label>
+  <input type="datetime-local" name="startDate" id="StartDate" required><br>
+  <label>End Date</label>
+  <input type="datetime-local" name="endDate" id="endDate" required><br>
+  <label for="type">Choose a Type</label>
+
+<select name="type" id="type">
+  <option value="work">Work</option>
+  <option value="study">Study</option>
+  <option value="fun">Fun</option>
+  <option value="other" selected>Other</option>
+</select><br>
+  <input type="submit" value="Add">
+</form>
+
+<% if (locals.tasks) { %>
+  <% tasks.map((task, index) => { %>
+    <div style="border: 1px solid green;" data-type="<%= task.type %>">
+      <input type="checkbox" name="t<%= index %>" class="myCheckbox">
+      <h1 class="myHeading">
+        <%= task.name %>
+      </h1>
+      <h2>
+        <%= task.type %> 
+      </h2>
+      <h3>
+        <%= task.endDate %>
+      </h3>
+    </div>    
+  <% }) %>
+<% }  %>
+
+<%- include("partials/script.ejs") %>
+</main>
+
+<%- include("partials/footer.ejs") %>

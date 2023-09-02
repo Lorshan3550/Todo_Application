@@ -1,0 +1,31 @@
+<script>
+    const checkboxes = document.querySelectorAll('.myCheckbox');
+    const headings = document.querySelectorAll('.myHeading');
+    const navButtons = document.querySelectorAll('nav button');
+  
+    checkboxes.forEach((checkbox, index) => {
+      checkbox.addEventListener('change', function() {
+        if (checkbox.checked) {
+          headings[index].classList.add('completed');
+        } else {
+          headings[index].classList.remove('completed');
+        }
+      });
+    });
+  
+    navButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const typeToShow = button.id.toLowerCase();
+        const tasks = document.querySelectorAll('[data-type]');
+        
+        tasks.forEach(task => {
+          if (typeToShow === 'all' || task.getAttribute('data-type') === typeToShow) {
+            task.style.display = 'block';
+          } else {
+            task.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+  
